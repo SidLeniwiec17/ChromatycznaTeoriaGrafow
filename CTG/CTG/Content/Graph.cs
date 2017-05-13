@@ -10,6 +10,7 @@ namespace CTG.Content
     {
         public int Vertices { get; set; }
         public List<List<int>> Edges { get; set; }
+        public bool Loaded { get; set; }
         public Graph()
         {
 
@@ -18,6 +19,7 @@ namespace CTG.Content
         {
            Vertices = vertices;
            Edges = new List<List<int>>();
+           Loaded = false;
            for(int i = 0 ; i < vertices ; i++)
            {
                List<int> tmpList = new List<int>();
@@ -27,6 +29,7 @@ namespace CTG.Content
         public void InitializeGraph(int vertices)
         {
             Vertices = vertices;
+            Loaded = false;
             Edges = new List<List<int>>();
             for (int i = 0; i < vertices; i++)
             {

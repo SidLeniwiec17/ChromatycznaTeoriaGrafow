@@ -56,6 +56,7 @@ namespace CTG.Helpers
                     MessageBox.Show("Error ! " + ex.Message);
                 }
             }
+            graph.Loaded = true;
             return graph;
         }
 
@@ -65,6 +66,8 @@ namespace CTG.Helpers
             int vertices = 0;
             if (!int.TryParse(text[0], out vertices))
                 return false;
+            if (vertices != text.Count - 1)
+                return false;
 
             graph.InitializeGraph(vertices);
             try
@@ -72,6 +75,7 @@ namespace CTG.Helpers
                 for (int i = 1; i < text.Count; i++)
                 {
                     string singleLine = text[i].Substring(text[i].IndexOf(":") + 1);
+                    singleLine.Replace(" ", "");
                     string[] values = singleLine.Split(',');
                     if (values.Length > 0)
                     {

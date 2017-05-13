@@ -3,7 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Content="Load graph" HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Click="LoadGraph_Click" />
-
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" Content="Load graph" HorizontalAlignment="Center" Margin="5,5,5,5" VerticalAlignment="Center" Click="LoadGraph_Click" />
+            <TextBlock Name="Alg1ReultTxtBlock"  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch"/>
+        </Grid>        
+        <Border Name="BlakWait" BorderBrush="Black" BorderThickness="1" Background="#80000000" Visibility="Collapsed" Grid.RowSpan="3" Grid.ColumnSpan="3" >
+            <Grid>
+                <TextBlock Margin="0" TextWrapping="Wrap" Text="Please Wait..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="#7EFFFFFF"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

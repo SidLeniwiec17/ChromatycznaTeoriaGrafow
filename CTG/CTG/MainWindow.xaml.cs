@@ -22,15 +22,42 @@ namespace CTG
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string alg1result = "";
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void LoadGraph_Click(object sender, RoutedEventArgs e)
+        private async void LoadGraph_Click(object sender, RoutedEventArgs e)
         {
             Graph graph = InOutTxt.LoadGraphFromFile();
             Console.WriteLine("Graph loaded !");
+            if (graph.Loaded)
+            {
+                BlakWait.Visibility = Visibility.Visible;
+                await CalculateFirstAlg(graph);
+                Alg1ReultTxtBlock.Text = alg1result;
+                BlakWait.Visibility = Visibility.Collapsed;
+            }
+        }
+        public async Task CalculateFirstAlg(Graph graph)
+        {
+            await Task.Run(() =>
+            {
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                Tuple<List<Point>, List<int>> coloredVertices = Algorithms.Algorithm1.ColorGraph(graph);
+                watch.Stop();
+                if (CommonHelper.isCorrectColoring(graph, coloredVertices.Item1))
+                {
+                    alg1result = CommonHelper.PrintResult(coloredVertices.Item1, coloredVertices.Item2, watch);
+                    Console.WriteLine("Colored !");
+                }
+                else
+                {
+                    alg1result = "Wrong colloring !";
+                    Console.WriteLine("Colored but wrong!");
+                }
+            });
         }
     }
 }
