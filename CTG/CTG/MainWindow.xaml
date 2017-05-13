@@ -1,0 +1,9 @@
+﻿<Window x:Class="CTG.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="Load graph" HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top" Click="LoadGraph_Click" />
+
+    </Grid>
+</Window>
