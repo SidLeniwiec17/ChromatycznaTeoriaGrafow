@@ -11,7 +11,7 @@ namespace CTG.Algorithms
 {
     public class Algorithm2
     {
-        public static int[] ColorGraph(Graph graph)
+        public static Tuple<List<Point>, List<int>> ColorGraph(Graph graph)
         {
             //NC
             var notColoredVertices = Enumerable.Range(0, graph.Vertices).ToList();
@@ -34,9 +34,16 @@ namespace CTG.Algorithms
                 notColoredVertices.RemoveAll(x => colors[x] > 0);
                 i++;
             }
-            
+            var coloredVertices = new List<Point>(graph.Vertices);
+            var colorsList = new List<int>();
+            for (int j = 0; j < colors.Length; j++)
+            {
+                coloredVertices.Add(new Point(j, colors[j]));
+                if (!colorsList.Contains(colors[j]))
+                    colorsList.Add(colors[j]);
+            }
 
-            return colors;
+            return new Tuple<List<Point>, List<int>>(coloredVertices, colorsList);
         }
     }
 }

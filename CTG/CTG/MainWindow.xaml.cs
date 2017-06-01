@@ -23,6 +23,7 @@ namespace CTG
     public partial class MainWindow : Window
     {
         public string alg1result = "";
+        public string alg2result = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -55,6 +56,25 @@ namespace CTG
                 else
                 {
                     alg1result = "Wrong colloring !";
+                    Console.WriteLine("Colored but wrong!");
+                }
+            });
+        }
+        public async Task CalculateSecondAlg(Graph graph)
+        {
+            await Task.Run(() =>
+            {
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                Tuple<List<Point>, List<int>> coloredVertices = Algorithms.Algorithm2.ColorGraph(graph);
+                watch.Stop();
+                if (CommonHelper.isCorrectColoring(graph, coloredVertices.Item1))
+                {
+                    alg2result = CommonHelper.PrintResult(coloredVertices.Item1, coloredVertices.Item2, watch);
+                    Console.WriteLine("Colored !");
+                }
+                else
+                {
+                    alg2result = "Wrong colloring !";
                     Console.WriteLine("Colored but wrong!");
                 }
             });
