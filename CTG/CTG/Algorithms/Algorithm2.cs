@@ -27,7 +27,10 @@ namespace CTG.Algorithms
                 helperList = notColoredVertices.ToList();
                 while(helperList.Count > 0)
                 {
-                    int vertex = Algorithm2Hepler.GetVerticesWithDegrees(graph, helperList).First().Item1;
+                    int vertex = Algorithm2Hepler.GetVerticesWithDegrees(graph, helperList)
+                        .OrderBy(x => x.Item2)
+                        .First()
+                        .Item1;
                     colors[vertex] = i;
                     Algorithm2Hepler.EraseVertices(helperList, graph, vertex, colors);
                 }

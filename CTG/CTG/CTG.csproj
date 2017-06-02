@@ -68,6 +68,7 @@
     <Compile Include="Helpers\Algorithm1Helpers.cs" />
     <Compile Include="Helpers\CommonHelper.cs" />
     <Compile Include="Helpers\InOutTxt.cs" />
+    <Compile Include="Helpers\MonteCarlo.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

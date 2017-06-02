@@ -19,19 +19,25 @@ namespace CTG.Helpers
         {
             List<Tuple<int, int>> result = new List<Tuple<int, int>>();
             int[] degrees = new int[graph.Vertices];
-            for (int i = 0; i < graph.Edges.Count; i++)
+            
+
+            for (int i = 0; i < graph.Vertices; i++)
             {
                 if (vertices.Contains(i))
+                {
                     foreach (var v in graph.Edges[i])
                         if (vertices.Contains(v))
                         {
                             degrees[v]++;
                             degrees[i]++;
                         }
+                }
+                else
+                    degrees[i] = -1;
             }
             for (int i = 0; i < degrees.Length; i++)
             {
-                if (degrees[i]>0)
+                if (degrees[i]>=0)
                 {
                     result.Add(new Tuple<int, int>(i, degrees[i]));
                 }
@@ -43,6 +49,8 @@ namespace CTG.Helpers
         {
             bool[] directions = new bool[2];
             List<int> colorsToCheck = new List<int>();
+
+            vertices.Remove(vertex);
 
             if (graph.Edges[vertex].Count > 0)
                 directions[0] = true;
