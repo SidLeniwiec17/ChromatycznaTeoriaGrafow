@@ -31,18 +31,25 @@ namespace CTG
 
         private async void LoadGraph_Click(object sender, RoutedEventArgs e)
         {
-            //Graph graph = InOutTxt.LoadGraphFromFile();
-            //Console.WriteLine("Graph loaded !");
-            //if (graph.Loaded)
-            //{
-            //    BlakWait.Visibility = Visibility.Visible;
-            //    await CalculateFirstAlg(graph);
-            //    Alg1ReultTxtBlock.Text = alg1result;
-            //    BlakWait.Visibility = Visibility.Collapsed;
+            Graph graph = InOutTxt.LoadGraphFromFile();
+            Console.WriteLine("Graph loaded !");
+            if (graph.Loaded)
+            {
+                BlakWait.Visibility = Visibility.Visible;
 
-            //    await CalculateSecondAlg(graph);
-            //}
-              Alg1ReultTxtBlock.Text = MonteCarlo.Test(50, 50);
+                Random rnd = new Random();
+                int randomVertices = rnd.Next(2, 60);
+
+                await CalculateFirstAlg(graph);
+                Alg1ReultTxtBlock.Text = alg1result;
+                await CalculateSecondAlg(graph);
+
+                Alg2ReultTxtBlock.Text = alg1result;
+
+                SummaryTextBlock.Text = MonteCarlo.Test(randomVertices, randomVertices);
+                BlakWait.Visibility = Visibility.Collapsed;
+
+            }
         }
         public async Task CalculateFirstAlg(Graph graph)
         {

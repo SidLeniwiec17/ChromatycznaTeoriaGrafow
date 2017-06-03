@@ -59,7 +59,7 @@ namespace CTG.Helpers
                 }
             }
 
-            string result = string.Format("Algorithm 1 - Time: {0}, accuracy: {1}/{2}, Better index: {5}\nAlgorithm 2 - Time : {3}, accuracy: {4}/{2}, Better index: {6}",
+            string result = string.Format("Algorithm 1 - accuracy: {1}/{2}, Better index: {5}\nAlgorithm 2 - accuracy: {4}/{2}, Better index: {6}",
                 alg1Time,
                 alg1successes,
                 rounds,
