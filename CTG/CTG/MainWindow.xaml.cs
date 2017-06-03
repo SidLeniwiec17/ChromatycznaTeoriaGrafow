@@ -36,17 +36,14 @@ namespace CTG
             if (graph.Loaded)
             {
                 BlakWait.Visibility = Visibility.Visible;
-
-                Random rnd = new Random();
-                int randomVertices = rnd.Next(2, 60);
-
+                
                 await CalculateFirstAlg(graph);
                 Alg1ReultTxtBlock.Text = alg1result;
                 await CalculateSecondAlg(graph);
 
                 Alg2ReultTxtBlock.Text = alg1result;
 
-                SummaryTextBlock.Text = MonteCarlo.Test(randomVertices, randomVertices);
+                SummaryTextBlock.Text = MonteCarlo.Test(50, 100);
                 BlakWait.Visibility = Visibility.Collapsed;
 
             }

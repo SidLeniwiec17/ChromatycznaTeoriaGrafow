@@ -59,7 +59,7 @@ namespace CTG.Helpers
                 }
             }
 
-            string result = string.Format("Algorithm 1 - accuracy: {1}/{2}, Better index: {5}\nAlgorithm 2 - accuracy: {4}/{2}, Better index: {6}",
+            string result = string.Format("Algorithm 1 - Less colors: {5}\nAlgorithm 2 - Less colors: {6}, trials: {2}",
                 alg1Time,
                 alg1successes,
                 rounds,
@@ -74,7 +74,7 @@ namespace CTG.Helpers
         {
             Random random = new Random();
             int vertices = random.Next(maxVertices) + 1;
-            int edgesCount = random.Next(vertices * (vertices - 1));
+            int edgesCount = random.Next(vertices * (vertices - 1) / 2);
             Graph graph = new Graph(vertices);
             bool[,] edges = new bool[vertices, vertices];
 
@@ -85,7 +85,7 @@ namespace CTG.Helpers
                 {
                     from = random.Next(vertices);
                     to = random.Next(vertices);
-                } while (from == to || edges[from, to]);
+                } while (from == to || edges[from, to] || edges[to, from]);
                 edges[from, to] = true;
             }
 
