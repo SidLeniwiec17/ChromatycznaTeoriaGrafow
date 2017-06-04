@@ -45,7 +45,7 @@ namespace CTG
 
                 Alg2ReultTxtBlock.Text = alg2result;
 
-                ///SummaryTextBlock.Text = MonteCarlo.Test(randomVertices, randomVertices);
+                SummaryTextBlock.Text = MonteCarlo.Test(randomVertices, randomVertices);
                 BlakWait.Visibility = Visibility.Collapsed;
 
             }
@@ -76,16 +76,8 @@ namespace CTG
                 var watch = System.Diagnostics.Stopwatch.StartNew();
                 Tuple<List<Point>, List<int>> coloredVertices = Algorithms.Algorithm2.ColorGraph(graph);
                 watch.Stop();
-                if (CommonHelper.isCorrectColoring(graph, coloredVertices.Item1))
-                {
-                    alg2result = CommonHelper.PrintResult(coloredVertices.Item1, coloredVertices.Item2, watch);
-                    Console.WriteLine("Colored !");
-                }
-                else
-                {
-                    alg2result = "Wrong colloring !";
-                    Console.WriteLine("Colored but wrong!");
-                }
+                alg2result = CommonHelper.PrintResult(coloredVertices.Item1, coloredVertices.Item2, watch);
+                Console.WriteLine("Colored !");                
             });
         }
     }
