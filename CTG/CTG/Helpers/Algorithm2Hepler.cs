@@ -47,55 +47,127 @@ namespace CTG.Helpers
 
         public static void EraseVertices(List<int> vertices, Graph graph, int vertex, int[] colors)
         {
-            bool[] directions = new bool[2];
-            List<int> colorsToCheck = new List<int>();
-
             vertices.Remove(vertex);
 
-            if (graph.Edges[vertex].Count > 0)
-                directions[0] = true;
-            foreach (var to in graph.Edges[vertex])
+            vertices.RemoveAll(x => graph.Edges[vertex].Contains(x));
+            vertices.RemoveAll(x => graph.Edges[x].Contains(vertex));
+
+            List<int> colorsToCheck = new List<int>();
+            //vertex -> color
+            foreach(var e in graph.Edges[vertex])
             {
-                if (colors[to] > 0)
+                if (colors[e] > 0)
                 {
-                    colorsToCheck.Add(colors[to]);
-                }
-                vertices.Remove(to);
-            }
-            for (int i = 0; i < graph.Edges.Count; i++)
-            {
-                if (graph.Edges[i].Count > 0 && colors[i] > 0 && colorsToCheck.Contains(colors[i]))
-                {
-                        foreach (int v in graph.Edges[i])
-                    vertices.Remove(v);
+                    for (int i = 0; i < graph.Vertices; i++)
+                    {
+                        if (colors[i] == colors[e])
+                            vertices.RemoveAll(x => graph.Edges[i].Contains(x));
+                    }
                 }
             }
-            colorsToCheck.RemoveAll(x => true);
 
-
-            for (int i = 0; i < graph.Edges.Count; i++)
+            //color -> vertex
+            for (int i = 0; i < graph.Vertices; i++)
             {
-                if (i == vertex)
-                    continue;
+                if (graph.Edges[i].Contains(vertex) && colors[i] > 0)
+                {
+                    colorsToCheck.Add(colors[i]);
+                }
+            }
+            for (int i = 0; i < graph.Vertices; i++)
+            {
+                if (graph.Edges[i].Any(x => colorsToCheck.Contains(colors[x])))
+                {
+                    vertices.Remove(i);
+                }
+            }
+
+            foreach (int v in graph.Edges[vertex])
+            {
+                vertices.RemoveAll(x => graph.Edges[v].Contains(x));
+            }
+
+            for (int i = 0; i < graph.Vertices; i++)
+            {
                 if (graph.Edges[i].Contains(vertex))
                 {
-                    directions[1] = true;
-                    vertices.Remove(i);
-                    if (colors[i] > 0)
-                        colorsToCheck.Add(colors[i]);
+                    vertices.RemoveAll(x => graph.Edges[x].Contains(i));
                 }
             }
-            for (int i = 0; i < graph.Edges.Count; i++)
-            {
-                bool erase = false;
-                foreach(var v in graph.Edges[i])
-                {
-                    if (colorsToCheck.Contains(colors[v]))
-                        erase = true;
-                }
-                if (erase)
-                    vertices.Remove(i);
-            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //bool[] directions = new bool[2];
+            //List<int> colorsToCheck = new List<int>();
+
+            //vertices.Remove(vertex);
+
+            //if (graph.Edges[vertex].Count > 0)
+            //    directions[0] = true;
+
+            //foreach (var to in graph.Edges[vertex])
+            //{
+            //    if (colors[to] > 0)
+            //    {
+            //        colorsToCheck.Add(colors[to]);
+            //    }
+            //    vertices.Remove(to);
+            //}
+
+            //for (int i = 0; i < graph.Edges.Count; i++)
+            //{
+            //    if (graph.Edges[i].Count > 0 && colors[i] > 0 && colorsToCheck.Contains(colors[i]))
+            //    {
+            //            foreach (int v in graph.Edges[i])
+            //        vertices.Remove(v);
+            //    }
+            //}
+            //colorsToCheck.RemoveAll(x => true);
+
+
+            //for (int i = 0; i < graph.Edges.Count; i++)
+            //{
+            //    if (i == vertex)
+            //        continue;
+            //    if (graph.Edges[i].Contains(vertex))
+            //    {
+            //        directions[1] = true;
+            //        vertices.Remove(i);
+            //        if (colors[i] > 0)
+            //            colorsToCheck.Add(colors[i]);
+            //    }
+            //}
+            //for (int i = 0; i < graph.Edges.Count; i++)
+            //{
+            //    bool erase = false;
+            //    foreach(var v in graph.Edges[i])
+            //    {
+            //        if (colorsToCheck.Contains(colors[v]))
+            //            erase = true;
+            //    }
+            //    if (erase)
+            //        vertices.Remove(i);
+            //}
         }
     }
 }
